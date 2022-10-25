@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo/logo.png'
+import DrakMode from '../DrakMode/DrakMode';
 
 const Header = () => {
     return (
@@ -23,10 +24,12 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
+                        <NavLink to='/home' className='text-decoration-none text-white me-2 fw-bold'>Home</NavLink>
                         <NavLink className='text-decoration-none text-white me-2 fw-bold'>Courses</NavLink>
                         <NavLink className='text-decoration-none text-white me-2 fw-bold'>FAQ</NavLink>
                         <NavLink className='text-decoration-none text-white me-2 fw-bold'>Blog</NavLink>
                     </Nav>
+                    <DrakMode></DrakMode>
                     <Nav>
                         <Nav.Link href="#deets">More deets</Nav.Link>
                         <Nav.Link eventKey={2} href="#memes">
