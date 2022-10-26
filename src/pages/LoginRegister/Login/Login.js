@@ -23,7 +23,7 @@ const Login = () => {
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                    Submit
+                    LogIn
                 </Button>
             </Form>
         </div>

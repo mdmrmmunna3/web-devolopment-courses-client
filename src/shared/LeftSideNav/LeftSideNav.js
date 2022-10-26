@@ -20,7 +20,7 @@ const LeftSideNav = () => {
                 coursCategories.map(courseCategory => <ListGroup
                     className='list-group'
                     key={courseCategory.id}>
-                     <ListGroup.Item className='shadow bg-body rounded mb-2 course-link'><Link to={`/courses/${courseCategory.id}`} className='text-decoration-none' >{courseCategory.name}</Link></ListGroup.Item>
+                     <ListGroup.Item className='shadow bg-body rounded mb-2 course-link'><Link to={`/category/${courseCategory.id}`} className='text-decoration-none' >{courseCategory.name}</Link></ListGroup.Item>
                 </ListGroup>)
                     
             }
