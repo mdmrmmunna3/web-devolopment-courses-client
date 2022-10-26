@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -32,10 +33,10 @@ const Header = () => {
                     </Nav>
                     <DrakMode></DrakMode>
                     <Nav>
-                        <Nav.Link href="#deets">More deets</Nav.Link>
-                        <Nav.Link eventKey={2} href="#memes">
-                            Dank memes
-                        </Nav.Link>
+                        <NavLink to='/login'><Button size='sm' variant="outline-light border-0" className='me-2'>LogIn</Button></NavLink>
+                        <NavLink to='/register'>
+                        <Button size='sm' variant="outline-light border-0">Register</Button>
+                        </NavLink>
                     </Nav>
                     <div className='d-lg-none'>
                         <LeftSideNav></LeftSideNav>

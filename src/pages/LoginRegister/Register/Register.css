@@ -1,0 +1,27 @@
+.main-container {
+    background-image: url('../../../assets/logres/AP-EAMCET-2020.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+.text-style {
+    color: white;
+}
+
+.form-container {
+    background-image: url('../../../assets/logres/log.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 50px;
+    border-radius: 20px;
+    
+}
+
+@media only screen and (max-width: 576px) {
+    
+    .form-field{
+        padding: 10px;
+       
+    }
+}

@@ -1,0 +1,28 @@
+.body {
+    color: white;
+    background-image: url('../../../assets/logres/LogResjpg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.form-field {
+    background-image: url('../../../assets/logres/log.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 50px;
+    border-radius: 20px
+}
+
+
+@media only screen and (max-width: 576px) {
+    
+    .form-field{
+        padding: 10px;
+       
+    }
+}
