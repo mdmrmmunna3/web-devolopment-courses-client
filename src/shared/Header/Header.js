@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo/logo.png'
 import DrakMode from '../DrakMode/DrakMode';
+import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Header = () => {
     return (
@@ -36,6 +37,9 @@ const Header = () => {
                             Dank memes
                         </Nav.Link>
                     </Nav>
+                    <div className='d-lg-none'>
+                        <LeftSideNav></LeftSideNav>
+                    </div>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

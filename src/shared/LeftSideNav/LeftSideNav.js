@@ -2,6 +2,8 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ListGroup from 'react-bootstrap/ListGroup';
+import './LeftSideNav.css';
 
 const LeftSideNav = () => {
     const [coursCategories, setCourseCategories] = useState([]);
@@ -13,12 +15,13 @@ const LeftSideNav = () => {
     }, [])
     return (
         <div>
-            <h2>All Courses: {coursCategories.length}</h2>
+            <h2 className='category-length mb-3'>All Courses: {coursCategories.length}</h2>
             {
-                coursCategories.map(courseCategory => <p
+                coursCategories.map(courseCategory => <ListGroup
+                    className='list-group'
                     key={courseCategory.id}>
-                    <Link to={`/course-category/${courseCategory.id}`}>{courseCategory.name}</Link>
-                </p>)
+                     <ListGroup.Item className='shadow bg-body rounded mb-2 course-link'><Link to={`/courses/${courseCategory.id}`} className='text-decoration-none' >{courseCategory.name}</Link></ListGroup.Item>
+                </ListGroup>)
                     
             }
         </div>
