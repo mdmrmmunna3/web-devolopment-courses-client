@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
     // googleLogin
     const providerLogin = (provider) => {
         return signInWithPopup(auth, provider)
-    }
+    } 
 
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Image, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,6 +8,7 @@ import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo/logo.png'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import DrakMode from '../DrakMode/DrakMode';
+
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Header = () => {
@@ -35,13 +36,37 @@ const Header = () => {
                         <NavLink className='text-decoration-none text-white me-2 fw-bold'>Blog</NavLink>
                     </Nav>
                     <DrakMode></DrakMode>
-                    
+
                     <Nav>
-                        <NavLink to='/login'><Button size='sm' variant="outline-light border-0" className='me-2'>LogIn</Button>
-                        </NavLink>
-                        <NavLink to='/register'>
-                            <Button size='sm' variant="outline-light border-0">Register</Button>
-                        </NavLink>
+                        <span>
+                            {user?.photoURL ?
+                                <>
+
+                                    {['bottom'].map((placement) => (
+                                        <OverlayTrigger
+                                            key={placement}
+                                            placement={placement}
+                                            overlay={
+                                                <Tooltip id={`tooltip-${user?.displayName}`}>
+                                                    User-Name: <strong>{user?.displayName}</strong>.
+                                                </Tooltip>
+                                            }
+                                        >
+                                            <Image roundedCircle src={user?.photoURL} style={{ height: '30px' }}>
+                                            </Image>
+                                        </OverlayTrigger>
+                                    ))}
+                                </>
+                                :
+                                <>
+                                    <NavLink to='/login'><Button size='sm' variant="outline-light border-0" className='me-2'>LogIn</Button>
+                                    </NavLink>
+                                    <NavLink to='/register'>
+                                        <Button size='sm' variant="outline-light border-0">Register</Button>
+                                    </NavLink>
+                                </>
+                            }
+                        </span>
 
                     </Nav>
 
@@ -55,3 +80,4 @@ const Header = () => {
 };
 
 export default Header;
+
