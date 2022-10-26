@@ -20,6 +20,10 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, provider)
     } 
 
+    // signOut
+     
+
+    // create account by gmail and password
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
     }
