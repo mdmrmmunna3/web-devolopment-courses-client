@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useContext } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
@@ -12,12 +12,13 @@ import './Register.css'
 
 const Register = () => {
 
-    const { providerLogin, createUser,updateUserProfile, verificationEmail } = useContext(AuthContext);
+    const { providerLogin, createUser, updateUserProfile, verificationEmail } = useContext(AuthContext);
 
     // setError 
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
+    // googleSignIn
     const googleProvider = new GoogleAuthProvider();
     const handleGoogleSignUp = () => {
         providerLogin(googleProvider)
@@ -30,6 +31,21 @@ const Register = () => {
                 console.error('error', error);
             })
     }
+
+    //Githubsignin
+    const githubProvider = new GithubAuthProvider();
+    const handleGithubSignUp = () => {
+        providerLogin(githubProvider)
+            .then((result) => {
+                const user = result.user;
+                console.log(user)
+
+            })
+            .catch((error) => {
+                console.error('error', error);
+            })
+    }
+
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -54,7 +70,7 @@ const Register = () => {
             .catch((error) => {
                 console.error('error', error)
                 setError(error.message)
-        });
+            });
         // updateProfile by name and photourl
         const handleUpdateUserProfile = (name, photoURL) => {
             const userProfile = {
@@ -62,7 +78,7 @@ const Register = () => {
                 photoURL: photoURL
             }
             updateUserProfile(userProfile)
-                .then(() => {})
+                .then(() => { })
                 .catch(error => console.error('error', error));
         }
 
@@ -72,7 +88,7 @@ const Register = () => {
                 .then(() => { })
                 .catch(error => console.error('error', error));
         }
-        
+
     }
 
     return (
@@ -107,7 +123,7 @@ const Register = () => {
                     <p className='text-white'>OR</p>
                     <ButtonGroup vertical>
                         <Button onClick={handleGoogleSignUp} className='mb-2' variant="primary"><FaGoogle></FaGoogle> Login With Google</Button>
-                        <Button variant="dark"><FaGithub /> Login With Github</Button>
+                        <Button onClick={handleGithubSignUp} variant="dark"><FaGithub /> Login With Github</Button>
                     </ButtonGroup>
                 </div>
                 <div className='text-center mt-2'>
@@ -122,7 +138,7 @@ const Register = () => {
                 </div>
 
             </Form>
-            
+
         </div>
     );
 };
