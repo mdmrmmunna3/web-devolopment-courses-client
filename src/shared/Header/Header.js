@@ -4,6 +4,7 @@ import { Button, Image, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import {  FaUser } from 'react-icons/fa';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo/logo.png'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
@@ -68,6 +69,7 @@ const Header = () => {
                                     <NavLink to='/register'>
                                         <Button size='sm' variant="outline-light border-0">Register</Button>
                                     </NavLink>
+                                    <Link><FaUser></FaUser> </Link>
                                 </>
                             }
                         </span>
