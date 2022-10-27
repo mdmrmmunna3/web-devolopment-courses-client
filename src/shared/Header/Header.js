@@ -58,7 +58,7 @@ const Header = () => {
                                             
                                         </OverlayTrigger>
                                     ))}
-                                    {/* <p className='text-white'>{user?.email}</p> */}
+                                    
                                     <Button className='text-white border-0' onClick={logOut} variant='outline-secondary' size='sm' >Log Out</Button>
                                 </>
                                 :

@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import toast from 'react-hot-toast';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
@@ -11,7 +12,7 @@ import './Register.css'
 
 const Register = () => {
 
-    const { providerLogin, createUser } = useContext(AuthContext);
+    const { providerLogin, createUser,updateUserProfile, verificationEmail } = useContext(AuthContext);
 
     // setError 
     const [error, setError] = useState('');
@@ -45,12 +46,33 @@ const Register = () => {
                 console.log(user);
                 setError('')
                 form.reset();
+                handleUpdateUserProfile(name, photoURL);
+                handleEmailVerification();
+                toast.success('Please Check your email address and verify your email')
                 navigate('/');
             })
             .catch((error) => {
                 console.error('error', error)
                 setError(error.message)
-        })
+        });
+        // updateProfile by name and photourl
+        const handleUpdateUserProfile = (name, photoURL) => {
+            const userProfile = {
+                displayName: name,
+                photoURL: photoURL
+            }
+            updateUserProfile(userProfile)
+                .then(() => {})
+                .catch(error => console.error('error', error));
+        }
+
+        // verification email
+        const handleEmailVerification = () => {
+            verificationEmail()
+                .then(() => { })
+                .catch(error => console.error('error', error));
+        }
+        
     }
 
     return (

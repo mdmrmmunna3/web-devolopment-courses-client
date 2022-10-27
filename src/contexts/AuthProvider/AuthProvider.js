@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createContext } from 'react';
 import app from '../../firebase/firebase.config';
 
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 
 
 export const AuthContext = createContext();
@@ -11,7 +11,7 @@ const auth = getAuth(app)
 
 const AuthProvider = ({ children }) => {
 
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true);
 
     // googleLogin
@@ -40,12 +40,24 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
+    // updateProfile
+    const updateUserProfile = (userProfile) => {
+        return updateProfile(auth.currentUser, userProfile);
+    }
+
+    // email verification
+    const verificationEmail = () => {
+        return sendEmailVerification(auth.currentUser);
+    }
+
     // call by useeffect 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log('user inside sate change', currentUser);
-            setUser(currentUser);
-            // setLoading(false);
+            if (currentUser === null || currentUser.emailVerified) {
+                setUser(currentUser);
+            }
+            setLoading(false);
         })
 
         return () => {
@@ -60,6 +72,9 @@ const AuthProvider = ({ children }) => {
         logOut,
         signIn,
         loading,
+        setLoading,
+        updateUserProfile,
+        verificationEmail,
     }
 
     return (

@@ -3,21 +3,26 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import './Login.css'
 
 const Login = () => {
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn, setLoading } = useContext(AuthContext);
     const [error, setError] = useState('')
 
     const navigate = useNavigate();
 
+    // apply location by useLocation and send to location sate path
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
+
     const handleLogInSubmit = event => {
         event.preventDefault();
         const form = event.target;
-        console.log(form.value)
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
@@ -28,14 +33,21 @@ const Login = () => {
                 console.log(user);
                 form.reset();
                 setError('');
-                navigate('/');
-
+                // email verify conditon
+                if (user.emailVerified) {
+                    navigate(from, { replace: true });
+                }
+                else {
+                    toast.error('Your email not verify ? Please check your email address and confirm to verify!')
+                }
             })
             .catch(error => {
                 console.error('error', error);
                 setError(error.message);
             })
-
+            .finally(() => {
+                setLoading(false)
+            })
     }
 
     return (
@@ -51,7 +63,7 @@ const Login = () => {
                     <Form.Label >Password</Form.Label>
                     <Form.Control name='password' className='field' type="password" placeholder="Password" />
                 </Form.Group>
-                
+
                 <Button className='px-4 ' variant="primary" type="submit">
                     LogIn
                 </Button>
