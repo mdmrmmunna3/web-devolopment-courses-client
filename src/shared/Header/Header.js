@@ -4,11 +4,12 @@ import { Button, Image, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {  FaUser } from 'react-icons/fa';
+import { FaUser } from 'react-icons/fa';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo/logo.png'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import DrakMode from '../DrakMode/DrakMode';
+
 
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
@@ -35,7 +36,7 @@ const Header = () => {
                         <NavLink to='/home' className='text-decoration-none text-white me-2 fw-bold'>Home</NavLink>
                         <NavLink to='/course' className='text-decoration-none text-white me-2 fw-bold'>Courses</NavLink>
                         <NavLink className='text-decoration-none text-white me-2 fw-bold'>FAQ</NavLink>
-                        <NavLink className='text-decoration-none text-white me-2 fw-bold'>Blog</NavLink>
+                        <NavLink to='/blog' className='text-decoration-none text-white me-2 fw-bold'>Blog</NavLink>
                     </Nav>
                     <DrakMode></DrakMode>
 
@@ -56,10 +57,10 @@ const Header = () => {
                                         >
                                             <Image className='me-2' roundedCircle src={user?.photoURL} style={{ height: '30px' }}>
                                             </Image>
-                                            
+
                                         </OverlayTrigger>
                                     ))}
-                                    
+
                                     <Button className='text-white border-0' onClick={logOut} variant='outline-secondary' size='sm' >Log Out</Button>
                                 </>
                                 :

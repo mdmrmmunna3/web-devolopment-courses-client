@@ -42,11 +42,13 @@ const AuthProvider = ({ children }) => {
 
     // updateProfile
     const updateUserProfile = (userProfile) => {
+        setLoading(true)
         return updateProfile(auth.currentUser, userProfile);
     }
 
     // email verification
     const verificationEmail = () => {
+        setLoading(true)
         return sendEmailVerification(auth.currentUser);
     }
 
