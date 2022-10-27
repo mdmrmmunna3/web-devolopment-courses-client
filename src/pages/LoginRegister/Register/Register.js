@@ -1,10 +1,11 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React from 'react';
+import React, { useState } from 'react';
 import { useContext } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import './Register.css'
 
@@ -12,12 +13,17 @@ const Register = () => {
 
     const { providerLogin, createUser } = useContext(AuthContext);
 
+    // setError 
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    const googleProvider = new GoogleAuthProvider();
     const handleGoogleSignUp = () => {
-        const googleProvider = new GoogleAuthProvider();
         providerLogin(googleProvider)
             .then((result) => {
                 const user = result.user;
                 console.log(user)
+
             })
             .catch((error) => {
                 console.error('error', error);
@@ -37,8 +43,14 @@ const Register = () => {
             .then((result) => {
                 const user = result.user;
                 console.log(user);
+                setError('')
+                form.reset();
+                navigate('/');
             })
-            .catch((error) => console.error('error', error))
+            .catch((error) => {
+                console.error('error', error)
+                setError(error.message)
+        })
     }
 
     return (
@@ -77,14 +89,17 @@ const Register = () => {
                     </ButtonGroup>
                 </div>
                 <div className='text-center mt-2'>
-                    <Button className='mb-2' variant="primary" type="submit" >
+                    <Button className='mb-2 px-4' variant="primary" type="submit" >
                         Register
                     </Button>
+                    <br />
+                    <Form.Text className="text-danger ms-2 fw-semibold">
+                        {error}
+                    </Form.Text>
                 </div>
-                <Form.Text className="text-danger ms-2">
 
-                </Form.Text>
             </Form>
+            
         </div>
     );
 };

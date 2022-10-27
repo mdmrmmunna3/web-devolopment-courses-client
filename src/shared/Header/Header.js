@@ -12,7 +12,8 @@ import DrakMode from '../DrakMode/DrakMode';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Header = () => {
-    const { user } = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext);
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container >
@@ -39,7 +40,7 @@ const Header = () => {
 
                     <Nav>
                         <span>
-                            {user?.photoURL ?
+                            {user?.uid ?
                                 <>
 
                                     {['bottom'].map((placement) => (
@@ -48,14 +49,17 @@ const Header = () => {
                                             placement={placement}
                                             overlay={
                                                 <Tooltip id={`tooltip-${user?.displayName}`}>
-                                                    User-Name: <strong>{user?.displayName}</strong>.
+                                                    <strong>{user?.displayName}</strong>.
                                                 </Tooltip>
                                             }
                                         >
-                                            <Image roundedCircle src={user?.photoURL} style={{ height: '30px' }}>
+                                            <Image className='me-2' roundedCircle src={user?.photoURL} style={{ height: '30px' }}>
                                             </Image>
+                                            
                                         </OverlayTrigger>
                                     ))}
+                                    {/* <p className='text-white'>{user?.email}</p> */}
+                                    <Button className='text-white border-0' onClick={logOut} variant='outline-secondary' size='sm' >Log Out</Button>
                                 </>
                                 :
                                 <>

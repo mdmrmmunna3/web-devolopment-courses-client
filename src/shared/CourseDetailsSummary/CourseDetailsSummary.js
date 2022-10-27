@@ -35,7 +35,7 @@ const CourseDetailsSummary = ({ course }) => {
                         <span className='fw-semibold'>{rating.number}</span>
                     </div>
                 </Card.Footer>
-                <Button variant="outline-primary border-0" className=' fw-bold' >Get Enroll</Button>
+                <Link to='/register'><Button variant="outline-primary border-0" className=' fw-bold' >Get Enroll</Button></Link>
             </div>
         </Card>
     );
