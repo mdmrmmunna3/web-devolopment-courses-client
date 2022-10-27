@@ -5,7 +5,7 @@ import { ButtonGroup } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import './Register.css'
 
@@ -92,6 +92,7 @@ const Register = () => {
                     <Button className='mb-2 px-4' variant="primary" type="submit" >
                         Register
                     </Button>
+                    <p>Already have an Account? <Link className='fw-semibold' to='/login'>Login</Link> </p>
                     <br />
                     <Form.Text className="text-danger ms-2 fw-semibold">
                         {error}

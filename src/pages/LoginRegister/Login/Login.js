@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import './Login.css'
 
@@ -51,15 +51,14 @@ const Login = () => {
                     <Form.Label >Password</Form.Label>
                     <Form.Control name='password' className='field' type="password" placeholder="Password" />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
+                
                 <Button className='px-4 ' variant="primary" type="submit">
                     LogIn
                 </Button>
                 <Form.Text className="text-danger ms-2 fw-semibold">
                     {error}
                 </Form.Text>
+                <p className='text-dark'>You have no Account ? Please <Link className='text-decoration-none fw-semibold' to='/register'>Register</Link> </p>
             </Form>
         </div>
     );
