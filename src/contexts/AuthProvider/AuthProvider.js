@@ -97,6 +97,7 @@ const AuthProvider = ({ children }) => {
         setUser,
         githubLogin,
         verificationEmail,
+        error,
 
     }
 

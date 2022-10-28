@@ -6,6 +6,28 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+## Project Name
+### `WD-Web Development`
+
+# Firebase live site link 
+[Firebase live site link] (https://wd-development-course.web.app/course)
+
+# Project Desciption
+
+* first i create react app and private repo, then i create firebase file 
+
+* Then i create new file and connent fire base athuentication on gamil and password , github and google sign in
+
+* My project name is WD-Web Development , This project is learning platform course releated '
+
+* I explean an mordern web skills and how to learn this 
+
+* create a responsive website 
+
+* when user login then see special feature other wise they redired go to login / register page
+
+* use react bootstrap ,bootstrap , css , react- hot -toast , react router and other also.....
+
 ### `npm start`
 
 Runs the app in the development mode.\

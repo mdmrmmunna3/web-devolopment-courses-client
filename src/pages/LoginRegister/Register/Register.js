@@ -1,4 +1,4 @@
-import {  GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import {   GoogleAuthProvider } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useContext } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
@@ -12,7 +12,7 @@ import './Register.css'
 
 const Register = () => {
 
-    const { providerLogin, setLoading, createUser, gitLogin, githubLogin, setUser, updateUserProfile, verificationEmail } = useContext(AuthContext);
+    const { providerLogin,  createUser,  githubLogin,  updateUserProfile, verificationEmail } = useContext(AuthContext);
 
     // setError 
     const [error, setError] = useState('');
