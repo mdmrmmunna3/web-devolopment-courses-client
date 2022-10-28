@@ -1,4 +1,4 @@
-import {  GoogleAuthProvider } from 'firebase/auth';
+import {  GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useContext } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
@@ -12,7 +12,7 @@ import './Register.css'
 
 const Register = () => {
 
-    const { providerLogin, createUser, githubSignIn,  updateUserProfile, verificationEmail } = useContext(AuthContext);
+    const { providerLogin, setLoading, createUser, gitLogin,  setUser, updateUserProfile, verificationEmail } = useContext(AuthContext);
 
     // setError 
     const [error, setError] = useState('');
@@ -42,19 +42,22 @@ const Register = () => {
 
 
     // Githubsignin
-    // const githubProvider = new GithubAuthProvider();
-    // const handleGithubSignUp = () => {
-    //     setLoading(true)
-    //     providerLogin(githubProvider)
-    //         .then((result) => {
-    //             const user = result.user;
-    //             setUser(user)
-    //         })
-    //         .catch((error) => {
-    //             console.error('error', error);
-    //         })
-    //         .finally (()=>{setLoading(false)})
-    // }
+    const githubProvider = new GithubAuthProvider();
+    const handleGithubSignUp = () => {
+        setLoading(false)
+        gitLogin(githubProvider)
+            .then((result) => {
+                const user = result.user;
+               setUser(user)
+            })
+            .catch((error) => {
+                console.error('error', error);
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+       
+    }
 
 
     const handleSubmit = event => {
@@ -136,7 +139,7 @@ const Register = () => {
                     <p className='text-white'>OR</p>
                     <ButtonGroup vertical>
                         <Button onClick={handleGoogleSignUp} className='mb-2' variant="primary"><FaGoogle></FaGoogle> Login With Google</Button>
-                        <Button onClick={githubSignIn} variant="dark"><FaGithub /> Login With Github</Button>
+                        <Button onClick={handleGithubSignUp} variant="dark"><FaGithub /> Login With Github</Button>
                     </ButtonGroup>
                 </div>
                 <div className='text-center mt-2'>

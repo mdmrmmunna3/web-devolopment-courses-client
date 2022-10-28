@@ -3,28 +3,29 @@ import { Button, Card } from 'react-bootstrap';
 import { FaDownload, FaStar, FaStarHalfAlt } from 'react-icons/fa';
 import { Link, useLoaderData } from 'react-router-dom';
 import './CourseSummaryCard.css'
-import ReactToPdf from 'react-to-pdf';
+import Pdf from 'react-to-pdf';
 
 const ref = React.createRef();
 const CourseSummaryCard = () => {
     const details = useLoaderData();
     console.log(details)
-    const { name, img, title, desciption, rating } = details
+    const { id, name, img, title, desciption, rating } = details
     return (
         <Card className=' main shadow'>
             <Card.Header className="text-center text-white" style={{ backgroundColor: '#212529' }}><p className='text-primary fs-4'>{name}</p>
                 <div className='d-flex justify-content-between'>
                     <Card.Title>{title}</Card.Title>
-                    <ReactToPdf className='border-none' targetRef={ref}>
+                    <Pdf className='border-none' targetRef={ref}>
                         {({ toPdf }) => (
                             <button className='border-0 ps-4' onClick={toPdf}><FaDownload className='me-4 fs-4'></FaDownload></button>
                         )}
-                    </ReactToPdf >
+                    </Pdf >
 
                 </div>
             </Card.Header>
+            <Card.Img variant="top" src={img} />
             <Card.Body ref={ref}>
-                <Card.Img variant="top" src={img} />
+
                 <Card.Text>
                     <>Description : {
                         desciption
@@ -43,7 +44,7 @@ const CourseSummaryCard = () => {
                             <span className='fw-semibold'>{rating.number}</span>
                         </div>
                     </Card.Footer>
-                    <Button variant="outline-primary border-0" className=' fw-bold' >Get Premimum Access</Button>
+                    <Link to={`/checkout/${id}`}><Button variant="outline-primary border-0" className=' fw-bold' >Get Premimum Access</Button></Link>
                     < Link to='/course'> <Button variant="outline-primary border-0" className=' fw-bold' >Back to Course</Button></Link>
                 </div>
             </Card.Body>

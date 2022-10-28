@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createContext } from 'react';
 import app from '../../firebase/firebase.config';
 
-import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth,  onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 
 
 export const AuthContext = createContext();
@@ -20,19 +20,25 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, provider)
     }
 
-    // // github
-    const githubSignIn = () => {
-        const githubProvider = new GithubAuthProvider();
-        setLoading(true)
-         signInWithPopup(auth, githubProvider)
-         .then(result => {
-            setUser(result.user)
-         })
-         .catch((error) => {
-            console.log(error.message);
-        })
-        .finally(() => {setLoading(false)})
-    };
+    //githublogin
+    const gitLogin = (provider) => {
+        setLoading(true);
+        return signInWithPopup(auth,provider)
+    }
+
+    // // // github
+    // const githubSignIn = () => {
+    //     const githubProvider = new GithubAuthProvider();
+    //     setLoading(true)
+    //      signInWithPopup(auth, githubProvider)
+    //      .then(result => {
+    //         setUser(result.user)
+    //      })
+    //      .catch((error) => {
+    //         console.log(error.message);
+    //     })
+    //     .finally(() => {setLoading(false)})
+    // };
 
     // signOut
     const logOut = () => {
@@ -91,7 +97,7 @@ const AuthProvider = ({ children }) => {
         setLoading,
         updateUserProfile,
         setUser,
-        githubSignIn,
+        gitLogin,
         verificationEmail,
         
     }

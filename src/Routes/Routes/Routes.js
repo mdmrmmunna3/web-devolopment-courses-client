@@ -7,6 +7,7 @@ import Course from "../../pages/Course/Course";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/LoginRegister/Login/Login";
 import Register from "../../pages/LoginRegister/Register/Register";
+import CheckOut from "../../shared/CheckOut/CheckOut";
 import CourseDetails from "../../shared/CourseDetails/CourseDetails";
 import CourseSummaryCard from "../../shared/CourseSummaryCard/CourseSummaryCard";
 import ErrorPage from "../../shared/ErrorPage/ErrorPage";
@@ -60,6 +61,11 @@ export const routes = createBrowserRouter([
             {
                 path: '/profile',
                 element: <PrivateRoute><UserProfile></UserProfile></PrivateRoute>
+            },
+            {
+                path: '/checkout/:id',
+                element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
+                loader: (({params}) => fetch(`https://web-devolopment-courses-server.vercel.app/courses/${params.id}`))
             }
         ]
     },
