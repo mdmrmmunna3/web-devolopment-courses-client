@@ -1,0 +1,15 @@
+.profile-style {
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile-style img {
+    width: 100%;
+    height: 300px;
+}
+
+@media only screen and (max-width:576px) {
+    .profile-style {
+        display: block;
+    }
+}

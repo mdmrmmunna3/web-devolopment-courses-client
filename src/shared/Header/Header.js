@@ -15,7 +15,7 @@ import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
-    
+
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -36,6 +36,7 @@ const Header = () => {
                     <Nav className="me-auto">
                         <NavLink to='/home' className='text-decoration-none text-white me-2 fw-bold'>Home</NavLink>
                         <NavLink to='/course' className='text-decoration-none text-white me-2 fw-bold'>Courses</NavLink>
+
                         <NavLink className='text-decoration-none text-white me-2 fw-bold'>FAQ</NavLink>
                         <NavLink to='/blog' className='text-decoration-none text-white me-2 fw-bold'>Blog</NavLink>
                     </Nav>
@@ -56,8 +57,8 @@ const Header = () => {
                                                 </Tooltip>
                                             }
                                         >
-                                            <Image className='me-2' roundedCircle src={user?.photoURL} style={{ height: '30px' }}>
-                                            </Image>
+                                            <Link to='/profile'><Image className='me-2' roundedCircle src={user?.photoURL} style={{ height: '30px' }}>
+                                            </Image></Link>
 
                                         </OverlayTrigger>
                                     ))}
@@ -71,7 +72,7 @@ const Header = () => {
                                     <NavLink to='/register'>
                                         <Button size='sm' variant="outline-light border-0">Register</Button>
                                     </NavLink>
-                                    <Link><FaUser></FaUser> </Link>
+                                    <Link to='/profile'><FaUser></FaUser> </Link>
                                 </>
                             }
                         </span>
