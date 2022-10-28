@@ -37,7 +37,7 @@ const Header = () => {
                         <NavLink to='/home' className='text-decoration-none text-white me-2 fw-bold'>Home</NavLink>
                         <NavLink to='/course' className='text-decoration-none text-white me-2 fw-bold'>Courses</NavLink>
 
-                        <NavLink className='text-decoration-none text-white me-2 fw-bold'>FAQ</NavLink>
+                        <NavLink to='/faq' className='text-decoration-none text-white me-2 fw-bold'>FAQ</NavLink>
                         <NavLink to='/blog' className='text-decoration-none text-white me-2 fw-bold'>Blog</NavLink>
                     </Nav>
                     <DrakMode></DrakMode>

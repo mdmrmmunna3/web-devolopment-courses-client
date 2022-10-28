@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createContext } from 'react';
 import app from '../../firebase/firebase.config';
 
-import { createUserWithEmailAndPassword, getAuth,  onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 
 
 export const AuthContext = createContext();
@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     // googleLogin
     const providerLogin = (provider) => {
@@ -21,24 +22,21 @@ const AuthProvider = ({ children }) => {
     }
 
     //githublogin
-    const gitLogin = (provider) => {
-        setLoading(true);
-        return signInWithPopup(auth,provider)
+    const githubProvider = new GithubAuthProvider();
+    const githubLogin = () => {
+        setLoading(true)
+        signInWithPopup(auth, githubProvider)
+            .then(result => {
+                const user = result.user;
+                setUser(user)
+            })
+            .catch(error => {
+                setError(error.message)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
     }
-
-    // // // github
-    // const githubSignIn = () => {
-    //     const githubProvider = new GithubAuthProvider();
-    //     setLoading(true)
-    //      signInWithPopup(auth, githubProvider)
-    //      .then(result => {
-    //         setUser(result.user)
-    //      })
-    //      .catch((error) => {
-    //         console.log(error.message);
-    //     })
-    //     .finally(() => {setLoading(false)})
-    // };
 
     // signOut
     const logOut = () => {
@@ -97,9 +95,9 @@ const AuthProvider = ({ children }) => {
         setLoading,
         updateUserProfile,
         setUser,
-        gitLogin,
+        githubLogin,
         verificationEmail,
-        
+
     }
 
     return (

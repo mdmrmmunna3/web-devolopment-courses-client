@@ -6,13 +6,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import toast from 'react-hot-toast';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import './Register.css'
 
 const Register = () => {
 
-    const { providerLogin, setLoading, createUser, gitLogin,  setUser, updateUserProfile, verificationEmail } = useContext(AuthContext);
+    const { providerLogin, setLoading, createUser, gitLogin, githubLogin, setUser, updateUserProfile, verificationEmail } = useContext(AuthContext);
 
     // setError 
     const [error, setError] = useState('');
@@ -24,7 +24,8 @@ const Register = () => {
         setAccepted(event.target.checked)
     }
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+
 
     // googleSignIn
     const googleProvider = new GoogleAuthProvider();
@@ -36,28 +37,27 @@ const Register = () => {
 
             })
             .catch((error) => {
-                console.error('error', error);
+                setError(error.message)
             })
     }
 
-
-    // Githubsignin
-    const githubProvider = new GithubAuthProvider();
-    const handleGithubSignUp = () => {
-        setLoading(false)
-        gitLogin(githubProvider)
-            .then((result) => {
-                const user = result.user;
-               setUser(user)
-            })
-            .catch((error) => {
-                console.error('error', error);
-            })
-            .finally(() => {
-                setLoading(false)
-            })
+    // // Githubsignin
+    // const githubProvider = new GithubAuthProvider();
+    // const handleGithubSignUp = () => {
+    //     setLoading(false)
+    //     gitLogin(githubProvider)
+    //         .then((result) => {
+    //             const user = result.user;
+    //            setUser(user)
+    //         })
+    //         .catch((error) => {
+    //             setError(error.message)
+    //         })
+    //         .finally(() => {
+    //             setLoading(false)
+    //         })
        
-    }
+    // }
 
 
     const handleSubmit = event => {
@@ -78,7 +78,7 @@ const Register = () => {
                 handleUpdateUserProfile(name, photoURL);
                 handleEmailVerification();
                 toast.success('Please Check your email address and verify your email')
-                // navigate('/');
+                navigate('/');
             })
             .catch((error) => {
                 console.error('error', error)
@@ -139,7 +139,7 @@ const Register = () => {
                     <p className='text-white'>OR</p>
                     <ButtonGroup vertical>
                         <Button onClick={handleGoogleSignUp} className='mb-2' variant="primary"><FaGoogle></FaGoogle> Login With Google</Button>
-                        <Button onClick={handleGithubSignUp} variant="dark"><FaGithub /> Login With Github</Button>
+                        <Button onClick={githubLogin} variant="dark mb-2"><FaGithub /> Login With Github</Button>
                     </ButtonGroup>
                 </div>
                 <div className='text-center mt-2'>

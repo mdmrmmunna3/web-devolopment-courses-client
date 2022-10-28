@@ -1,0 +1,31 @@
+.footer-container {
+    background-color: rgb(15, 13, 13);
+}
+.footer-f {
+    display: grid;
+    grid-template-columns: repeat(3 , 1fr);
+    gap: 20px;
+    padding: 50px;
+    margin: 0 50px ;
+}
+
+.footer-f h3, li {
+    color: gray;
+   
+}
+
+@media only screen and (max-width:768px) {
+    .footer-f {
+        grid-template-columns: 1fr 1fr;
+        margin: 0;
+    }
+    
+}
+
+@media only screen and (max-width:576px) {
+    .footer-f {
+        grid-template-columns: 1fr;
+        margin: 0;
+    }
+   
+}

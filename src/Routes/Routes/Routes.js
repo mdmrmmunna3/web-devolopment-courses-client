@@ -4,6 +4,7 @@ import TermsAndContdition from "../../OthersFile/TermsAndContdition/TermsAndCont
 import UserProfile from "../../OthersFile/UserProfile/UserProfile";
 import Blog from "../../pages/Blog/Blog";
 import Course from "../../pages/Course/Course";
+import FAQ from "../../pages/FAQ/FAQ";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/LoginRegister/Login/Login";
 import Register from "../../pages/LoginRegister/Register/Register";
@@ -53,6 +54,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/blog',
                 element: <Blog></Blog>
+            },
+            {
+                path: '/faq',
+                element: <FAQ></FAQ>
             },
             {
                 path: '/terms',
