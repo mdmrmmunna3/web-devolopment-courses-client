@@ -15,6 +15,7 @@ import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
+    
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">

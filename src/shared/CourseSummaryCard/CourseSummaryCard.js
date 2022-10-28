@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import './CourseSummaryCard.css'
 
 const CourseSummaryCard = () => {
@@ -20,7 +20,7 @@ const CourseSummaryCard = () => {
                     }</>
                 </Card.Text>
             </Card.Body>
-            <div className='d-flex justify-content-between mt-2'>
+            <div className='d-flex justify-content-between mt-2 '>
                 <Card.Footer className="border-0 text-dark">
                     <div className='d-flex align-items-center'>
                         <span className='me-2 text-warning'>
@@ -34,6 +34,7 @@ const CourseSummaryCard = () => {
                     </div>
                 </Card.Footer>
                 <Button variant="outline-primary border-0" className=' fw-bold' >Get Premimum Access</Button>
+                < Link to='/course'> <Button variant="outline-primary border-0" className=' fw-bold' >Back to Course</Button></Link>
             </div>
         </Card>
     );

@@ -12,10 +12,18 @@ import './Register.css'
 
 const Register = () => {
 
-    const { providerLogin, createUser, updateUserProfile, verificationEmail } = useContext(AuthContext);
+    const { providerLogin, createUser, githubSignIn, setUser, updateUserProfile, verificationEmail , setLoading} = useContext(AuthContext);
 
     // setError 
     const [error, setError] = useState('');
+
+    // accepts terms and conditon
+    const [accepted, setAccepted] = useState(false);
+
+    const handleTermsAndCondition = event => {
+        setAccepted(event.target.checked)
+    }
+
     const navigate = useNavigate();
 
     // googleSignIn
@@ -32,19 +40,21 @@ const Register = () => {
             })
     }
 
-    //Githubsignin
-    const githubProvider = new GithubAuthProvider();
-    const handleGithubSignUp = () => {
-        providerLogin(githubProvider)
-            .then((result) => {
-                const user = result.user;
-                console.log(user)
 
-            })
-            .catch((error) => {
-                console.error('error', error);
-            })
-    }
+    // Githubsignin
+    // const githubProvider = new GithubAuthProvider();
+    // const handleGithubSignUp = () => {
+    //     setLoading(true)
+    //     providerLogin(githubProvider)
+    //         .then((result) => {
+    //             const user = result.user;
+    //             setUser(user)
+    //         })
+    //         .catch((error) => {
+    //             console.error('error', error);
+    //         })
+    //         .finally (()=>{setLoading(false)})
+    // }
 
 
     const handleSubmit = event => {
@@ -114,7 +124,10 @@ const Register = () => {
                     <Form.Label className='text-style'>Password</Form.Label>
                     <Form.Control name='password' type="password" placeholder="Password" required />
                 </Form.Group>
-
+                <Form.Check
+                    type="checkbox"
+                    onClick={handleTermsAndCondition}
+                    label={<>Accept <Link to='/terms'>Terms & Conditions</Link> </>} />
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
 
                 </Form.Group>
@@ -123,14 +136,14 @@ const Register = () => {
                     <p className='text-white'>OR</p>
                     <ButtonGroup vertical>
                         <Button onClick={handleGoogleSignUp} className='mb-2' variant="primary"><FaGoogle></FaGoogle> Login With Google</Button>
-                        <Button onClick={handleGithubSignUp} variant="dark"><FaGithub /> Login With Github</Button>
+                        <Button onClick={githubSignIn} variant="dark"><FaGithub /> Login With Github</Button>
                     </ButtonGroup>
                 </div>
                 <div className='text-center mt-2'>
-                    <Button className='mb-2 px-4' variant="primary" type="submit" >
+                    <Button className='mb-2 px-4' variant="primary" type="submit" disabled={!accepted} >
                         Register
-                    </Button>
-                    <p>Already have an Account? <Link className='fw-semibold' to='/login'>Login</Link> </p>
+                    </Button >
+                    <p>Already have an Account? <Link className='fw-semibold' to='/login' >Login</Link> </p>
                     <br />
                     <Form.Text className="text-danger ms-2 fw-semibold">
                         {error}

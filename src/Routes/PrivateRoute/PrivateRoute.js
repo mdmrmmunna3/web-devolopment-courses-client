@@ -5,8 +5,9 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 
 const PrivateRoute = ({children}) => {
-    // const {user, loading, setLoading} = useContext(AuthContext); line-16 releted
+    
     const {user, loading} = useContext(AuthContext);
+    
     const location = useLocation();
 
     // loading when relaod page 

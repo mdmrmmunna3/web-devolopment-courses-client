@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createContext } from 'react';
 import app from '../../firebase/firebase.config';
 
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 
 
 export const AuthContext = createContext();
@@ -20,11 +20,25 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, provider)
     }
 
+    // // github
+    const githubSignIn = () => {
+        const githubProvider = new GithubAuthProvider();
+        setLoading(true)
+         signInWithPopup(auth, githubProvider)
+         .then(result => {
+            setUser(result.user)
+         })
+         .catch((error) => {
+            console.log(error.message);
+        })
+        .finally(() => {setLoading(false)})
+    };
+
     // signOut
     const logOut = () => {
         setLoading(true)
         signOut(auth)
-            .then(() => {})
+            .then(() => { })
             .catch(error => console.error(error))
     }
 
@@ -55,7 +69,7 @@ const AuthProvider = ({ children }) => {
     // call by useeffect 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log('user inside sate change', currentUser);
+            // console.log('user inside sate change', currentUser);
             if (currentUser === null || currentUser.emailVerified) {
                 setUser(currentUser);
             }
@@ -76,7 +90,10 @@ const AuthProvider = ({ children }) => {
         loading,
         setLoading,
         updateUserProfile,
+        setUser,
+        githubSignIn,
         verificationEmail,
+        
     }
 
     return (

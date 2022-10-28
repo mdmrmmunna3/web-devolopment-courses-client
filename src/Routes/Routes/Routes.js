@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../layout/Main";
+import TermsAndContdition from "../../OthersFile/TermsAndContdition/TermsAndContdition";
 import Blog from "../../pages/Blog/Blog";
 import Course from "../../pages/Course/Course";
 import Home from "../../pages/Home/Home";
@@ -50,6 +51,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/blog',
                 element: <Blog></Blog>
+            },
+            {
+                path: '/terms',
+                element: <TermsAndContdition></TermsAndContdition>
             }
         ]
     },
